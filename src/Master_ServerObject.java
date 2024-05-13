@@ -91,7 +91,8 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
 
     public int generateUniqueRandomId() {
         int id;
-        do {
+        do
+        {
             id = random.nextInt(Integer.MAX_VALUE); // Generate a random integer ID
         } while (filenameToId.containsValue(id)); // Check if the ID already exists in the map
         return id;
@@ -103,14 +104,20 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         List<Map.Entry<String, Master_DataServerStatus>> serverEntries = new ArrayList<>(serverMap.entrySet());
         Collections.sort(serverEntries, Comparator.comparingInt(entry -> entry.getValue().getFreeSpace()));
 
-        // Select the first three servers
+        // Select the first three servers or until there are no more servers with enough space
         List<DataServer_Interface> selectedServers = new ArrayList<>();
-        for (int i = 0; i < Math.min(3, serverEntries.size()); i++)
+        for (Map.Entry<String, Master_DataServerStatus> entry : serverEntries)
         {
-            selectedServers.add(serverEntries.get(i).getValue().getServer());
+            DataServer_Interface server = entry.getValue().getServer();
+            int freeSpace = entry.getValue().getFreeSpace();
+            if (freeSpace >= fileSizeInBytes && selectedServers.size() < 3)
+            {
+                selectedServers.add(server);
+            }
         }
         return selectedServers.toArray(new DataServer_Interface[0]);
     }
+
 
     public void lockFile(int fileId)
     {
