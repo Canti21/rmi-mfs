@@ -33,4 +33,9 @@ public class Master_DataServerStatus implements Serializable
     {
         this.availability = availability;
     }
+
+    public DataServer_Interface getServer()
+    {
+        return serverInterface;
+    }
 }

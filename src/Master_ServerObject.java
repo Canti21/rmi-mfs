@@ -1,9 +1,6 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
 
@@ -101,7 +98,17 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
 
     private DataServer_Interface[] selectDataServers(int fileSizeInBytes)
     {
-        return null;
+        // Sort servers based on free space
+        List<Map.Entry<String, Master_DataServerStatus>> serverEntries = new ArrayList<>(serverMap.entrySet());
+        Collections.sort(serverEntries, Comparator.comparingInt(entry -> entry.getValue().getFreeSpace()));
+
+        // Select the first three servers
+        List<DataServer_Interface> selectedServers = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, serverEntries.size()); i++)
+        {
+            selectedServers.add(serverEntries.get(i).getValue().getServer());
+        }
+        return selectedServers.toArray(new DataServer_Interface[0]);
     }
 
     public void lockFile(int fileId)
