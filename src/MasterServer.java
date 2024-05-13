@@ -6,24 +6,34 @@ import java.util.concurrent.ConcurrentMap;
 
 public class MasterServer
 {
-    private static ConcurrentMap<String, Integer> filenameToId;
-    private static ConcurrentMap<Integer, DataTable> idToData;
     private static ConcurrentMap<String, Master_DataServerStatus> serverMap;
     private static Registry registry;
     private static String name;
 
-    public MasterServer()
+    public static void start() throws Exception
     {
-        filenameToId = new ConcurrentHashMap<>();
-        idToData = new ConcurrentHashMap<>();
+        ConcurrentMap<String, Integer> filenameToId = new ConcurrentHashMap<>();
+        ConcurrentMap<Integer, DataTable> idToData = new ConcurrentHashMap<>();
         serverMap = new ConcurrentHashMap<>();
         name = "masterServer";
-    }
 
-    public void start() throws Exception
-    {
         registry = LocateRegistry.createRegistry(1099);
         registry.bind(name, new Master_ServerObject(filenameToId, idToData, serverMap));
+        Thread serversThread = new Thread(() -> {
+            while (true)
+            {
+                acquireDataServers();
+                try
+                {
+                    Thread.sleep(3000);
+                }
+                catch (InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        serversThread.start();
     }
 
     private static void acquireDataServers()
@@ -56,27 +66,12 @@ public class MasterServer
         }
         catch (Exception ex)
         {
-
+            ex.printStackTrace();
         }
     }
 
     public static void main(String[] args) throws Exception
     {
-        MasterServer masterServer = new MasterServer();
-        Thread serversThread = new Thread(() -> {
-            while (true)
-            {
-                acquireDataServers();
-                try
-                {
-                    Thread.sleep(3000);
-                }
-                catch (InterruptedException ex)
-                {
-
-                }
-            }
-        });
-        masterServer.start();
+        start();
     }
 }

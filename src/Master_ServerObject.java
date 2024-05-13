@@ -9,12 +9,14 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
     private ConcurrentMap<String, Integer> filenameToId;
     private ConcurrentMap<Integer, DataTable> idToData;
     private ConcurrentMap<String, Master_DataServerStatus> serverMap;
+    private Random random;
 
     public Master_ServerObject(ConcurrentMap<String, Integer> filenameToId, ConcurrentMap<Integer, DataTable> idToData, ConcurrentMap<String, Master_DataServerStatus> serverMap) throws RemoteException
     {
         this.filenameToId = filenameToId;
         this.idToData = idToData;
         this.serverMap = serverMap;
+        random = new Random();
     }
 
     public DataServer_Interface[] requestUpload(Object[] fileMetadata) throws RemoteException
@@ -88,7 +90,6 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
     }
 
     public int generateUniqueRandomId() {
-        Random random = new Random();
         int id;
         do {
             id = random.nextInt(Integer.MAX_VALUE); // Generate a random integer ID
