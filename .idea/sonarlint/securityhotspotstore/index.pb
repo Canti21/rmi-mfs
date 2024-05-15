@@ -33,3 +33,16 @@ w
 G.idea/sonarlint/issuestore/6/3/63eace3df5f52a7525be7047feb994622354890f,b/2/b24e0b32703121304a2a5da085d374651dc2faa8
 w
 G.idea/sonarlint/issuestore/7/c/7ce76a9e1aea4440acefa2e32083f87052afceb6,7/e/7ef5958d52fbecdd9f15577b3a669849e26d1d1a
+C
+src/DataServer.java,f/c/fc795afa5918cc47b017f331df07a3a211479b6e
+M
+src/DataServer_Interface.java,b/6/b68d3638cd76b5e48777af4f09652362f9f291b2
+I
+src/DataServerObject.java,a/e/ae1e144eceff0d96a1beb7825b3fa302a99c7e4a
+B
+src/DataTable.java,5/9/5915a67505183bc0ed0eeb744397f29030140864
+C
+src/MapWrapper.java,5/b/5beec69c23b824306ec74a21ea62fd8856499572
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
