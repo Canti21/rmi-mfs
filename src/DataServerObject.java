@@ -1,67 +1,86 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.zip.CRC32;
 
-public class DataServerObject extends UnicastRemoteObject implements DataServer_Interface {
-    private String serverName;
+public class DataServerObject extends UnicastRemoteObject implements DataServer_Interface
+{
     private int totalSpace;
     private int availableSpace;
-    private ConcurrentHashMap<Integer, byte[]> fileStorage;
+    private FileIOHandler fileIOHandler;
 
-    public DataServerObject(String serverName, int totalSpace, ConcurrentHashMap<Integer, byte[]> fileStorage) throws RemoteException {
+    public DataServerObject(int totalSpace) throws RemoteException
+    {
         super();
-        this.serverName = serverName;
-        this.totalSpace = totalSpace;
         this.availableSpace = totalSpace;
-        this.fileStorage = fileStorage;
+        this.fileIOHandler = new FileIOHandler();
     }
 
     @Override
-    public int uploadFile(int fileId, DataServer_Interface replicaServer1, DataServer_Interface replicaServer2, byte[] file) throws RemoteException {
-        if (availableSpace >= file.length) {
-            fileStorage.put(fileId, file);
+    public long uploadFile(int fileId, DataServer_Interface replicaServer1, DataServer_Interface replicaServer2, byte[] file) throws RemoteException
+    {
+        if (availableSpace >= file.length)
+        {
+            String fileName = "" + fileId;
+            fileIOHandler.writeByteArrayToFile(file, fileName);
             availableSpace -= file.length;
             // Upload replicas to replica servers if available
-            if (replicaServer1 != null && replicaServer2 != null) {
+            if (replicaServer1 != null && replicaServer2 != null)
+            {
                 replicaServer1.uploadReplica(fileId, file);
                 replicaServer2.uploadReplica(fileId, file);
             }
             return calculateChecksum(file);
-        } else {
+        }
+        else
+        {
             throw new RemoteException("Insufficient space on the server to upload the file.");
         }
     }
 
     @Override
-    public int uploadReplica(int fileId, byte[] file) throws RemoteException {
-        if (!fileStorage.containsKey(fileId)) {
-            fileStorage.put(fileId, file);
+    public long uploadReplica(int fileId, byte[] file) throws RemoteException
+    {
+        if (availableSpace >= file.length)
+        {
+            String fileName = "" + fileId;
+            fileIOHandler.writeByteArrayToFile(file, fileName);
+            availableSpace -= file.length;
             return calculateChecksum(file);
-        } else {
-            throw new RemoteException("File replica with the same ID already exists on the server.");
+        }
+        else
+        {
+            throw new RemoteException("Insufficient space on the server to upload the replica.");
         }
     }
 
     @Override
-    public Object[] downloadFile(int fileId) throws RemoteException {
-        byte[] file = fileStorage.get(fileId);
-        if (file != null) {
-            int checksum = calculateChecksum(file);
+    public Object[] downloadFile(int fileId) throws RemoteException
+    {
+        String fileName = "" + fileId;
+        byte[] file = fileIOHandler.readByteArrayFromFile(fileName);
+        if (file != null)
+        {
+            long checksum = calculateChecksum(file);
             return new Object[]{checksum, file};
-        } else {
+        }
+        else
+        {
             throw new RemoteException("File with the specified ID not found on the server.");
         }
     }
 
     @Override
-    public int heartBeat() throws RemoteException {
+    public int heartBeat() throws RemoteException
+    {
         return availableSpace;
     }
 
-    private int calculateChecksum(byte[] data) {
-        // Placeholder for checksum calculation logic
-        return data.length; // Dummy checksum (length of data)
+    public long calculateChecksum(byte[] data) throws RemoteException
+    {
+        CRC32 crc32 = new CRC32();
+        crc32.update(data);
+        return crc32.getValue();
     }
 }
 

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MapWrapper
+public class MapWrapper implements Serializable
 {
     private ConcurrentHashMap<String, Integer> fileToId;
     private ConcurrentHashMap<Integer, DataTable> idToData;

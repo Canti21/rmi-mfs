@@ -46,3 +46,11 @@ C
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+?
+src/Client.java,f/a/fab6dac3cdc568ed7aa4122a6189ef47d0fab33c
+F
+src/FileIOHandler.java,5/8/58783a09033b7d6510be6539cccfe33074f93753
+E
+src/FileMetadata.java,4/8/480ed011fd94a455ae85f5faaad61abaeec4d5a7
+O
+src/Master_ServerInterface.java,8/e/8e0e4acc44b1d5b372ea438503d71cee0a5d56ca

@@ -1,5 +1,24 @@
 
-}
-java:S1141H"5Extract this nested try block into a separate method.(ç£êúÿÿÿÿ8àÒ¬Í÷1J$0aeac76a-be06-49ca-9bfe-fe1ffd3d8389
-r	java:S106l"+Replace this use of System.out by a logger.(©•°›şÿÿÿÿ8ñÒ¬Í÷1J$ec200053-53fe-4a55-8045-3a565e752e30
-m	java:S106v"+Replace this use of System.out by a logger.(êÂâ8òÒ¬Í÷1J$fed9dec1-0fe3-4f06-87d7-a7f6cfc9a275
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(×Ñòò8Á£îø1
+W
+java:S1141Q"5Extract this nested try block into a separate method.(ç£êúÿÿÿÿ8Â£îø1
+O
+java:S2440"-Remove this instantiation of "FileIOHandler".(©§Äúÿÿÿÿ8Ú£îø1
+G	java:S106"+Replace this use of System.out by a logger.(äÎŒú8Ú£îø1
+L	java:S106 "+Replace this use of System.out by a logger.(ëë’°üÿÿÿÿ8Ú£îø1
+L	java:S106C"+Replace this use of System.out by a logger.(çã†Áùÿÿÿÿ8Ü£îø1
+G	java:S106T"+Replace this use of System.out by a logger.(ŞÿÏ8Ş£îø1
+R
+java:S2209m"5Change this instance-reference to a static reference.(¸‹Äı8ß£îø1
+L	java:S106s"+Replace this use of System.out by a logger.(©•°›şÿÿÿÿ8ß£îø1
+G	java:S106w"+Replace this use of System.out by a logger.(êÂâ8ß£îø1
+S
+java:S2209€"5Change this instance-reference to a static reference.(˜¦±³8à£îø1
+@
+java:S1128"$Remove this unused import 'java.io'.(¬›ãD8á£îø1
+I
+java:S1128",Remove this unused import 'java.rmi.Naming'.(Ü›¾¬8á£îø1
+W
+java:S1128"5Remove this unused import 'java.rmi.RemoteException'.(Ä÷àÿÿÿÿÿ8á£îø1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8á£îø1

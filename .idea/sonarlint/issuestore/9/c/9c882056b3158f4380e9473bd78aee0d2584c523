@@ -1,6 +1,19 @@
 
-	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¨šó8¼ïÊ€÷1J$26abad0a-b1cb-499b-be4b-3624a203df23
+	java:S101	"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¨šó8˜çéø1J$c15c2ff6-0267-4fbd-b59e-28e0faf78c48
+„
+java:S2222›";Unlock this lock along all executions paths of this method.(ö•ˆ¨ùÿÿÿÿ8¨çéø1J$7cdb53a3-627b-42dd-8ced-b4f21a3d3d44
 n
-java:S2160"+Override the "equals" method in this class.(¨šó8ÈïÊ€÷1J$9efda775-82e6-4499-944a-bd7cb83013a0
+java:S2160	"+Override the "equals" method in this class.(¨šó8©çéø1J$ac267802-7707-4933-ac05-881f00138b07
+r	java:S106"+Replace this use of System.out by a logger.(’Ìò¶şÿÿÿÿ8®çéø1J$de54f358-4595-46d5-a5c4-793678169e15
+k	java:S108")Either remove or fill this block of code.(ùéş8®çéø1J$2b8da316-25fc-4b04-a883-f0d88baaedeb
+l	java:S106!"+Replace this use of System.out by a logger.(ŸÿD8®çéø1J$b9ff28c8-af20-42e5-9d01-d8e65dbdb38a
+m	java:S106'"+Replace this use of System.out by a logger.(ˆ••8¯çéø1J$b63f22c4-f6fa-401b-bced-132518805f59
+m	java:S106,"+Replace this use of System.out by a logger.(áæÇÏ8¯çéø1J$3d1ab84c-81d7-4eb1-98d2-c727b0928f5a
+m	java:S106C"+Replace this use of System.out by a logger.(«ğÃ¥8±çéø1J$314c8cce-9a14-4fea-8696-f08bc0d9e508
+k	java:S108E")Either remove or fill this block of code.(ùéş8±çéø1J$54a58e44-962f-465c-9f5e-8c65e19e719d
+m	java:S106M"+Replace this use of System.out by a logger.(À­™Æ8²çéø1J$5e8d4e5e-9d2d-4f1f-bb56-445f6dfa113f
+k	java:S108O")Either remove or fill this block of code.(ùéş8²çéø1J$88182cc8-8db7-4daa-8e49-3086e049db6e
 i
-java:S1168F"&Return an empty array instead of null.(ù¾Ùõ8ÔïÊ€÷1J$99ed4895-ea7b-401a-92be-325131d07509
+java:S1168\"&Return an empty array instead of null.(ù¾Ùõ8³çéø1J$8ead94a7-b44d-4c23-b581-3ae4bae1ba91
+r	java:S106c"+Replace this use of System.out by a logger.(ñœ»ˆşÿÿÿÿ8´çéø1J$b4c26b29-e4da-477f-bfaa-7d07446f8a34
+k	java:S108e")Either remove or fill this block of code.(ùéş8´çéø1J$f8234aff-8381-46d5-9d53-5f5390aeb068

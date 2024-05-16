@@ -1,7 +1,10 @@
 import java.io.*;
+import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -13,6 +16,7 @@ public class MasterServer
     private static String masterBackupFile;
     private static ConcurrentHashMap<String, Integer> filenameToId;
     private static ConcurrentHashMap<Integer, DataTable> idToData;
+    private static FileIOHandler fileIOHandler;
 
     public static void start() throws Exception
     {
@@ -21,8 +25,11 @@ public class MasterServer
         serverMap = new ConcurrentHashMap<>();
         masterBackupFile = "masterBackup";
         name = "masterServer";
+        fileIOHandler = new FileIOHandler();
 
+        System.out.println("Looking for backup...");
         loadBackup();
+        System.out.println("Retrieving data servers...");
         acquireDataServers();
 
         registry = LocateRegistry.createRegistry(1099);
@@ -56,7 +63,8 @@ public class MasterServer
         });
         serversThread.start();
         backupThread.start();
-        registry.bind(name, new Master_ServerObject(filenameToId, idToData, serverMap));
+        registry.rebind(name, new Master_ServerObject(filenameToId, idToData, serverMap));
+        System.out.println("Master server READY!");
     }
 
     private static void acquireDataServers()
@@ -69,8 +77,11 @@ public class MasterServer
             {
                 if (!serverName.equals(name))
                 {
+
                     try
                     {
+                        if (!serverMap.containsKey(serverName))
+                            System.out.println("Found new server: \"" + serverName + "\"");
                         DataServer_Interface server = (DataServer_Interface) registry.lookup(serverName);
                         int freeSpace = server.heartBeat();
                         Master_DataServerStatus status = new Master_DataServerStatus(freeSpace, server);
@@ -95,23 +106,13 @@ public class MasterServer
 
     private static void loadBackup()
     {
-        File backupFile = new File(masterBackupFile);
-        if (backupFile.exists())
+        Object obj = fileIOHandler.readObjectFromFile(masterBackupFile);
+        if (obj instanceof MapWrapper)
         {
-            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(masterBackupFile)))
-            {
-                MapWrapper wrapper = (MapWrapper) inputStream.readObject();
-                if (wrapper != null)
-                {
-                    filenameToId.putAll(wrapper.getFileToId());
-                    idToData.putAll(wrapper.getIdToData());
-                    System.out.println("Maps loaded from backup file.");
-                }
-            }
-            catch (IOException | ClassNotFoundException e)
-            {
-                e.printStackTrace();
-            }
+            MapWrapper wrapper = (MapWrapper) obj;
+            filenameToId.putAll(wrapper.getFileToId());
+            idToData.putAll(wrapper.getIdToData());
+            System.out.println("Maps loaded from backup file.");
         }
         else
         {
@@ -121,14 +122,10 @@ public class MasterServer
 
     public static synchronized void updateBackup()
     {
-        MapWrapper maps = new MapWrapper(filenameToId, idToData);
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(masterBackupFile)))
+        if (!filenameToId.isEmpty() || !idToData.isEmpty())
         {
-            outputStream.writeObject(maps);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+            MapWrapper maps = new MapWrapper(filenameToId, idToData);
+            fileIOHandler.writeObjectToFile(maps, masterBackupFile);
         }
     }
 

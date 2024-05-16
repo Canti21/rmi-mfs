@@ -1,4 +1,4 @@
 
 g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(É™ Âşÿÿÿÿ
-0
-java:S1220""Move this file to a named package.
+N
+java:S1948"1Make "serverInterface" transient or serializable.(ŞöÁ‹8™‚›ø1

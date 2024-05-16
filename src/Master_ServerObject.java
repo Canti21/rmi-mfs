@@ -1,4 +1,6 @@
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
+import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
@@ -19,19 +21,28 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         random = new Random();
     }
 
-    public DataServer_Interface[] requestUpload(Object[] fileMetadata) throws RemoteException
+    public Object[] requestUpload(Object[] fileMetadata) throws RemoteException
     {
+        try
+        {
+            System.out.println("Upload requested from " + RemoteServer.getClientHost());
+        }
+        catch (ServerNotActiveException snae) { }
+
         FileMetadata metadata = (FileMetadata) fileMetadata[0];
+        System.out.println("\tMetadata received: " + metadata.getFileName() + ", " + metadata.getFileSizeInBytes() + ", " + metadata.getModifiedDate());
 
         // Get file name, modified date and file size
         String fileName = metadata.getFileName().toLowerCase();
 
         Integer existingFileId = filenameToId.get(fileName);
+        System.out.println(existingFileId);
         if (existingFileId != null)
         {
             lockFile(existingFileId);
             DataTable data = idToData.get(existingFileId);
-            return data.getServers();
+            System.out.println("\tItem already exists, returning: " + data.getServers());
+            return new Object[] {existingFileId, data.getServers()};
         }
 
         int fileSizeInBytes = metadata.getFileSizeInBytes();
@@ -44,17 +55,28 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         DataTable dataTable = new DataTable(metadata, selectedDataServers);
 
         idToData.put(fileId, dataTable);
+        lockFile(fileId);
 
-        return selectedDataServers;
+        return new Object[]{fileId, selectedDataServers};
     }
 
     public void confirmUpload(int fileId) throws RemoteException
     {
+        try
+        {
+            System.out.println("Client " + RemoteServer.getClientHost() + " has confirmed the upload of " + fileId);
+        }
+        catch (ServerNotActiveException snae) { }
         unlockFile(fileId);
     }
 
     public Object[] requestDownload(String fileName) throws RemoteException
     {
+        try
+        {
+            System.out.println("Download requested from " + RemoteServer.getClientHost());
+        }
+        catch (ServerNotActiveException snae) { }
         Integer fileId = filenameToId.get(fileName);
         if (fileId != null)
         {
@@ -64,7 +86,7 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
             if (dataServers != null)
             {
                 FileMetadata metadata = data.getMetadata();
-                return new Object[]{metadata, dataServers};
+                return new Object[]{fileId, metadata, dataServers};
             }
         }
         return null; // File Not Found
@@ -72,6 +94,11 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
 
     public void confirmDownload(int fileId) throws RemoteException
     {
+        try
+        {
+            System.out.println("Client " + RemoteServer.getClientHost() + " has confirmed the download of " + fileId);
+        }
+        catch (ServerNotActiveException snae) { }
         unlockFile(fileId);
     }
 
