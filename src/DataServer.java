@@ -16,7 +16,7 @@ public class DataServer
     {
         serverName = args[0];
         availableSpace = megabytesToBytes(Integer.parseInt(args[1]));
-        registry = LocateRegistry.getRegistry("localhost", 1099);
+        registry = LocateRegistry.getRegistry(args[2], Integer.parseInt(args[3]));
         DataServerObject dso = new DataServerObject(availableSpace);
         registry.rebind(serverName, dso);
         System.out.println("Data server \"" + serverName + "\" READY!");
@@ -24,9 +24,13 @@ public class DataServer
 
     public static void main(String[] args) throws RemoteException
     {
-        if (args.length >= 2)
+        if (args.length >= 4)
         {
             start(args);
+        }
+        else
+        {
+            System.out.println("Usage: java DataServer <serverName> <space> <masterServerAddress> <masterServerPort>");
         }
     }
 
