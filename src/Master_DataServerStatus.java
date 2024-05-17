@@ -38,4 +38,6 @@ public class Master_DataServerStatus implements Serializable
     {
         return serverInterface;
     }
+
+    public void setServerInterface(DataServer_Interface serverInterface) { this.serverInterface = serverInterface; }
 }

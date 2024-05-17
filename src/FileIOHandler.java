@@ -33,7 +33,6 @@ public class FileIOHandler
         try (FileOutputStream outputStream = new FileOutputStream(filename))
         {
             outputStream.write(byteArray);
-            System.out.println("Byte array written to file successfully.");
         }
         catch (IOException e)
         {
@@ -54,7 +53,6 @@ public class FileIOHandler
                 outputStream.write(buffer, 0, length);
             }
             byteArray = outputStream.toByteArray();
-            System.out.println("Byte array read from file successfully.");
         }
         catch (IOException e)
         {

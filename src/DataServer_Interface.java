@@ -8,4 +8,6 @@ public interface DataServer_Interface extends Remote
     Object[] downloadFile(int fileId) throws RemoteException;
     int heartBeat() throws RemoteException;
     long calculateChecksum(byte[] data) throws RemoteException;
+
+    String getName() throws RemoteException;
 }

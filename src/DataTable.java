@@ -1,17 +1,18 @@
 import java.io.Serializable;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class DataTable implements Serializable
 {
     private FileMetadata metadata;
     private DataServer_Interface[] servers;
-    private ReentrantLock lock;
+    private Semaphore semaphore;
 
     public DataTable(FileMetadata metadata, DataServer_Interface[] servers)
     {
         this.metadata = metadata;
         this.servers = servers;
-        this.lock = new ReentrantLock();
+        this.semaphore = new Semaphore(1);
     }
 
     public FileMetadata getMetadata()
@@ -34,8 +35,8 @@ public class DataTable implements Serializable
         this.servers = servers;
     }
 
-    public ReentrantLock getLock()
+    public Semaphore getLock()
     {
-        return lock;
+        return semaphore;
     }
 }

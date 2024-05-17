@@ -3,7 +3,9 @@ import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 public class Master_ServerObject extends UnicastRemoteObject implements Master_ServerInterface
@@ -11,9 +13,13 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
     private ConcurrentMap<String, Integer> filenameToId;
     private ConcurrentMap<Integer, DataTable> idToData;
     private ConcurrentMap<String, Master_DataServerStatus> serverMap;
+    private static ConcurrentHashMap<Integer, String[]> idToServerNames;
     private Random random;
 
-    public Master_ServerObject(ConcurrentMap<String, Integer> filenameToId, ConcurrentMap<Integer, DataTable> idToData, ConcurrentMap<String, Master_DataServerStatus> serverMap) throws RemoteException
+    public Master_ServerObject(ConcurrentMap<String, Integer> filenameToId,
+                               ConcurrentMap<Integer, DataTable> idToData,
+                               ConcurrentHashMap<Integer, String[]> idToServerNames,
+                               ConcurrentMap<String,Master_DataServerStatus> serverMap) throws RemoteException
     {
         this.filenameToId = filenameToId;
         this.idToData = idToData;
@@ -41,7 +47,7 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         {
             lockFile(existingFileId);
             DataTable data = idToData.get(existingFileId);
-            System.out.println("\tItem already exists, returning: " + data.getServers());
+            System.out.println("\tItem already exists, returning servers");
             return new Object[] {existingFileId, data.getServers()};
         }
 
@@ -51,10 +57,20 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
 
         filenameToId.put(fileName, fileId);
         DataServer_Interface[] selectedDataServers = selectDataServers(fileSizeInBytes);
+        List<String> serverNames = new ArrayList<>();
+        try
+        {
+            for (DataServer_Interface server : selectedDataServers)
+            {
+                serverNames.add(server.getName());
+            }
+        }
+        catch (RemoteException re) { }
 
         DataTable dataTable = new DataTable(metadata, selectedDataServers);
 
         idToData.put(fileId, dataTable);
+        idToServerNames.put(fileId, serverNames.toArray(new String[0]));
         lockFile(fileId);
 
         return new Object[]{fileId, selectedDataServers};
@@ -151,8 +167,15 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         DataTable data = idToData.get(fileId);
         if (data != null)
         {
-            Lock lock = data.getLock();
-            lock.lock(); // Acquire the lock
+            Semaphore lock = data.getLock();
+            try
+            {
+                lock.acquire(); // Acquire the lock
+            }
+            catch (InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
@@ -161,8 +184,8 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         DataTable data = idToData.get(fileId);
         if (data != null)
         {
-            Lock lock = data.getLock();
-            lock.unlock(); // Release the lock
+            Semaphore lock = data.getLock();
+            lock.release(); // Release the lock
         }
     }
 }
