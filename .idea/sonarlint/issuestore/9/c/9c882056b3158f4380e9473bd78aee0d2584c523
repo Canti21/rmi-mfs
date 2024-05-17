@@ -1,24 +1,25 @@
 
 Ä
-java:S1319"€The type of "idToServerNames" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(™å®8‚…Æ ø1J$7ee8e9e2-99c8-4a68-96d4-4a0b409a6a3c
-	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¨šó8ƒ…Æ ø1J$281b6866-90d7-4025-b6f8-a749439c2568
+java:S1319"€The type of "idToServerNames" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(™å®8¾±’¥ø1J$17c86677-fe82-40c5-8607-1dd970400a52
+	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¨šó8À±’¥ø1J$79fa17e2-99a3-4e85-a5ef-1a569b466f8e
 n
-java:S2160"+Override the "equals" method in this class.(¨šó8…Æ ø1J$b1267e63-eb83-4858-a1db-ef4d27048d82
-y
-java:S1172"6Remove this unused method parameter "idToServerNames".(™å®8‘…Æ ø1J$cbc83b74-4941-48c0-b73f-c05f67a3f12e
-r	java:S106""+Replace this use of System.out by a logger.(’Ìò¶şÿÿÿÿ8”…Æ ø1J$b2eeb929-cb99-4709-8aaa-662e0e858068
-k	java:S108$")Either remove or fill this block of code.(ùéş8”…Æ ø1J$268df6ae-aa2a-44bb-b637-976a2635d154
-l	java:S106'"+Replace this use of System.out by a logger.(ŸÿD8”…Æ ø1J$4f19f5e4-41eb-4868-931f-89619d2444b0
-m	java:S106-"+Replace this use of System.out by a logger.(ˆ••8•…Æ ø1J$93335b3f-6715-43b4-abaf-9c4df0850700
-r	java:S1062"+Replace this use of System.out by a logger.(·ï©¤şÿÿÿÿ8•…Æ ø1J$2ebdf90c-cb2a-4d64-a4e8-a92ebd54810b
-p	java:S108D")Either remove or fill this block of code.(Ğ½ÉĞúÿÿÿÿ8–…Æ ø1J$2ab22a5a-1298-4282-92b4-55bb4ca61b8c
-m	java:S106S"+Replace this use of System.out by a logger.(«ğÃ¥8—…Æ ø1J$a82281fd-da89-472e-b70d-3d4b92166a63
-k	java:S108U")Either remove or fill this block of code.(ùéş8—…Æ ø1J$5e834036-9a46-4af2-8f88-306b1995da20
-m	java:S106]"+Replace this use of System.out by a logger.(À­™Æ8—…Æ ø1J$9f8fbf14-3e44-4ecf-836e-58886aee7001
-k	java:S108_")Either remove or fill this block of code.(ùéş8—…Æ ø1J$ca5d5934-b336-409e-8a80-f9758b77789a
+java:S2160"+Override the "equals" method in this class.(¨šó8Ì±’¥ø1J$18376be4-8427-4aaf-adfe-8a651c412c4d
+r	java:S106#"+Replace this use of System.out by a logger.(’Ìò¶şÿÿÿÿ8Ñ±’¥ø1J$c551f7a0-8bc2-4fb2-9522-2b359f7453d8
+k	java:S108%")Either remove or fill this block of code.(ùéş8Ñ±’¥ø1J$a5f436ff-e00b-422e-a0be-ead9bb921473
+l	java:S106("+Replace this use of System.out by a logger.(ŸÿD8Ñ±’¥ø1J$58574d19-338c-41ed-bf37-07375bc2a69a
+m	java:S106."+Replace this use of System.out by a logger.(ˆ••8Ò±’¥ø1J$b96da88a-8f2f-48aa-95cc-91a462720169
+r	java:S1061"+Replace this use of System.out by a logger.(·ï©¤şÿÿÿÿ8Ö±’¥ø1J$3cbd4135-80ce-4200-a03b-516c277bd43f
+m	java:S106R"+Replace this use of System.out by a logger.(«ğÃ¥8Ö±’¥ø1J$3b48f1e0-647c-4986-993e-1b2eecc6e4ee
+k	java:S108T")Either remove or fill this block of code.(ùéş8Ö±’¥ø1J$54d85ee8-c862-4049-9af4-a5fa86185a3d
+m	java:S106\"+Replace this use of System.out by a logger.(À­™Æ8Ø±’¥ø1J$827a6d01-4fed-409b-b7f7-de508635fb4d
+k	java:S108^")Either remove or fill this block of code.(ùéş8×±’¥ø1J$f1d99513-6286-4d9a-af50-1ee781288852
 i
-java:S1168l"&Return an empty array instead of null.(ù¾Ùõ8˜…Æ ø1J$19f5a82e-9cc7-49f6-927d-05a7de1c2e61
-r	java:S106s"+Replace this use of System.out by a logger.(ñœ»ˆşÿÿÿÿ8˜…Æ ø1J$434d140f-4f45-4ede-8175-5ecc69bb5704
-k	java:S108u")Either remove or fill this block of code.(ùéş8˜…Æ ø1J$c8b119c1-9688-4a3e-bc21-07b920d8dc16
+java:S1168k"&Return an empty array instead of null.(ù¾Ùõ8×±’¥ø1J$e499c375-2b49-4ba8-bd54-6e1d48f7875a
+r	java:S106r"+Replace this use of System.out by a logger.(ñœ»ˆşÿÿÿÿ8Ó‹—¥ø1J$5afddaa1-f94c-4932-8764-f22e0c65f075
+k	java:S108t")Either remove or fill this block of code.(ùéş8Ø±’¥ø1J$1cc558b9-ad0d-48d2-93cf-2ee035654092
+ƒ
+java:S1854™":Remove this useless assignment to local variable "server".(›È¥ğøÿÿÿÿ8Ù±’¥ø1J$31418a6f-3ab9-4a04-9870-e2443a5a2731
+t
+java:S1481™"+Remove this unused "server" local variable.(›È¥ğøÿÿÿÿ8Ú±’¥ø1J$8a0dcb3c-d295-4ebc-a49f-e01d64d782c9
 
-java:S1128	"<Remove this unused import 'java.util.concurrent.locks.Lock'.(µÒÌÿ8çˆÈ ø1J$0ca8dfbb-89ac-4286-b0f3-8e9974dfc172
+java:S1128	"<Remove this unused import 'java.util.concurrent.locks.Lock'.(µÒÌÿ8œÏ’¥ø1J$a4672288-1e21-4ca0-be55-96b42e3c7597

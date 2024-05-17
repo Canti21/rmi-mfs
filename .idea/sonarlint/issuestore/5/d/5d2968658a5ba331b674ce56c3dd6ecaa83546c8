@@ -1,17 +1,32 @@
 
+ˆ	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(×Ñòò8‚×Î£ø1J$d08a6fed-c396-491f-bd9f-6bfe168c5d42
 }
-java:S1141S"5Extract this nested try block into a separate method.(ç£êúÿÿÿÿ8”íµ ø1J$01515929-963d-4605-b525-6ea7bc2377cc
+java:S1141T"5Extract this nested try block into a separate method.(ç£êúÿÿÿÿ8”íµ ø1J$2c700111-7f5b-4370-b7de-abdcf6abb3cf
 u
-java:S2440"-Remove this instantiation of "FileIOHandler".(©§Äúÿÿÿÿ8¼íµ ø1J$c5e7c284-9f26-4df1-af7e-810f2746a737
-m	java:S106!"+Replace this use of System.out by a logger.(äÎŒú8½íµ ø1J$739f04af-2a0d-4bd4-87df-a6f5cdebe4d2
-r	java:S106$"+Replace this use of System.out by a logger.(ëë’°üÿÿÿÿ8½íµ ø1J$36c6ae6d-7f6e-45e1-b394-ffc9e46386d1
-r	java:S106F"+Replace this use of System.out by a logger.(çã†Áùÿÿÿÿ8¿íµ ø1J$c5e0e168-62ed-4ae5-83cb-239705275382
-m	java:S106["+Replace this use of System.out by a logger.(ŞÿÏ8Àíµ ø1J$9b766ea1-e380-4d38-b42c-bbd8df3a012a
+java:S2440 "-Remove this instantiation of "FileIOHandler".(©§Äúÿÿÿÿ8¼íµ ø1J$2d1b8d49-bc2b-4318-ab64-90ef9c65f906
+m	java:S106""+Replace this use of System.out by a logger.(äÎŒú8½íµ ø1J$798afff5-b2c5-43c4-89ca-46eee2469267
+r	java:S106%"+Replace this use of System.out by a logger.(ëë’°üÿÿÿÿ8½íµ ø1J$b890afd4-b34a-4bb1-a79e-89cbee7777a0
+r	java:S106G"+Replace this use of System.out by a logger.(çã†Áùÿÿÿÿ8¿íµ ø1J$197b964e-b6d0-4497-97bf-1406bcc5d14a
+g
+java:S2147l"ECombine this catch with the one at line 107, which has the same body.(‚Äç üÿÿÿÿ8³Å»¥ø1
+m	java:S106\"+Replace this use of System.out by a logger.(ŞÿÏ8Àíµ ø1J$46fc704d-3054-4ace-b90a-34f09cc792ad
+k	java:S108k")Either remove or fill this block of code.(õÔë“8 ’å£ø1J$fdf8234a-ddb7-418d-aef6-a81f591598c2
+J	java:S108l")Either remove or fill this block of code.(‚Äç üÿÿÿÿ8µÅ»¥ø1
 x
-java:S2209r"5Change this instance-reference to a static reference.(¸‹Äı8Áíµ ø1J$66acaf8c-3aef-4968-bfbc-1772ed275a70
-r	java:S106z"+Replace this use of System.out by a logger.(©•°›şÿÿÿÿ8Âíµ ø1J$a24b3f6b-52ad-4719-b0eb-5c20cfb28f0a
-m	java:S106~"+Replace this use of System.out by a logger.(êÂâ8Âíµ ø1J$26a279b0-9342-4b0a-880c-29c1541e4f7d
+java:S2209u"5Change this instance-reference to a static reference.(¸‹Äı8Áíµ ø1J$d6ad27e3-7da5-40ce-a497-3a7d81491f65
+r	java:S106}"+Replace this use of System.out by a logger.(©•°›şÿÿÿÿ8Âíµ ø1J$28afaaae-a5b9-4bbe-8e0e-5caeccd406b4
+n	java:S106"+Replace this use of System.out by a logger.(êÂâ8Âíµ ø1J$3e92293b-d462-4b7c-8200-0103a66e1b45
 y
-java:S2209‡"5Change this instance-reference to a static reference.(˜¦±³8Âíµ ø1J$9b2a99f1-912e-4ad6-b575-44fc671fc660
-Y	java:S125§"<This block of commented-out lines of code should be removed.(ÕÛê·8öÇß¢ø1
-	java:S125±"<This block of commented-out lines of code should be removed.(Ø‰¹Æ8‘¯ß¢ø1J$b1e1e945-1867-4ffd-b705-d011a88b2f14
+java:S2209Š"5Change this instance-reference to a static reference.(˜¦±³8Âíµ ø1J$24ecf72a-0ce6-42d3-ae04-0a51680bd649
+	java:S125ª"<This block of commented-out lines of code should be removed.(ÕÛê·8öÇß¢ø1J$88c3a015-1508-422a-9926-ed3ad6ecbfa7
+	java:S125´"<This block of commented-out lines of code should be removed.(Ø‰¹Æ8‘¯ß¢ø1J$15e13f78-c903-4a98-b5ee-1d69f49589e8
+f
+java:S1128"$Remove this unused import 'java.io'.(¬›ãD8¹×Î£ø1J$662d6ce3-a79c-4db8-8003-316f9a215ccf
+o
+java:S1128",Remove this unused import 'java.rmi.Naming'.(Ü›¾¬8¹×Î£ø1J$36185f42-cb75-4040-be58-e31bcff83d23
+}
+java:S1128"5Remove this unused import 'java.rmi.RemoteException'.(Ä÷àÿÿÿÿÿ8¹×Î£ø1J$06dc2618-9edc-4ead-9dc7-1acbeccc7232
+s
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¹×Î£ø1J$26265da1-c844-4cb1-8df4-ad2a54573894
+r
+java:S1128	"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8¹×Î£ø1J$035373c6-2e2d-48f2-a028-7c4413357048

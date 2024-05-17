@@ -1,5 +1,6 @@
 import java.io.File;
 import java.nio.file.Files;
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -109,6 +110,10 @@ public class Client {
                             System.out.println("\tFile \"" + receivedFileName + "\" downloaded successfully");
                             break;
                         }
+                    }
+                    catch (ConnectException ce)
+                    {
+                        System.out.println("Download attempt failed");
                     }
                     catch (RemoteException re)
                     {

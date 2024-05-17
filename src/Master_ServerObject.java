@@ -13,7 +13,7 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
     private ConcurrentMap<String, Integer> filenameToId;
     private ConcurrentMap<Integer, DataTable> idToData;
     private ConcurrentMap<String, Master_DataServerStatus> serverMap;
-    private static ConcurrentHashMap<Integer, String[]> idToServerNames;
+    private ConcurrentHashMap<Integer, String[]> idToServerNames;
     private Random random;
 
     public Master_ServerObject(ConcurrentMap<String, Integer> filenameToId,
@@ -23,6 +23,7 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
     {
         this.filenameToId = filenameToId;
         this.idToData = idToData;
+        this.idToServerNames = idToServerNames;
         this.serverMap = serverMap;
         random = new Random();
     }
@@ -45,9 +46,9 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         System.out.println(existingFileId);
         if (existingFileId != null)
         {
+            System.out.println("\tItem already exists, returning servers");
             lockFile(existingFileId);
             DataTable data = idToData.get(existingFileId);
-            System.out.println("\tItem already exists, returning servers");
             return new Object[] {existingFileId, data.getServers()};
         }
 
@@ -56,21 +57,19 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         int fileId = generateUniqueRandomId();
 
         filenameToId.put(fileName, fileId);
-        DataServer_Interface[] selectedDataServers = selectDataServers(fileSizeInBytes);
-        List<String> serverNames = new ArrayList<>();
-        try
+        String[] selectedDataServersNames = selectDataServers(fileSizeInBytes);
+        List<DataServer_Interface> selectedDataServersList = new ArrayList<>();
+        for (String serverName : selectedDataServersNames)
         {
-            for (DataServer_Interface server : selectedDataServers)
-            {
-                serverNames.add(server.getName());
-            }
+            DataServer_Interface server = serverMap.get(serverName).getServer();
+            selectedDataServersList.add(server);
         }
-        catch (RemoteException re) { }
+        DataServer_Interface[] selectedDataServers = selectedDataServersList.toArray(new DataServer_Interface[0]);
 
         DataTable dataTable = new DataTable(metadata, selectedDataServers);
 
         idToData.put(fileId, dataTable);
-        idToServerNames.put(fileId, serverNames.toArray(new String[0]));
+        idToServerNames.put(fileId, selectedDataServersNames);
         lockFile(fileId);
 
         return new Object[]{fileId, selectedDataServers};
@@ -141,24 +140,24 @@ public class Master_ServerObject extends UnicastRemoteObject implements Master_S
         return id;
     }
 
-    private DataServer_Interface[] selectDataServers(int fileSizeInBytes)
+    private String[] selectDataServers(int fileSizeInBytes)
     {
         // Sort servers based on free space
         List<Map.Entry<String, Master_DataServerStatus>> serverEntries = new ArrayList<>(serverMap.entrySet());
         Collections.sort(serverEntries, Comparator.comparingInt(entry -> entry.getValue().getFreeSpace()));
 
         // Select the first three servers or until there are no more servers with enough space
-        List<DataServer_Interface> selectedServers = new ArrayList<>();
+        List<String> selectedServers = new ArrayList<>();
         for (Map.Entry<String, Master_DataServerStatus> entry : serverEntries)
         {
             DataServer_Interface server = entry.getValue().getServer();
             int freeSpace = entry.getValue().getFreeSpace();
             if (freeSpace >= fileSizeInBytes && selectedServers.size() < 3)
             {
-                selectedServers.add(server);
+                selectedServers.add(entry.getKey());
             }
         }
-        return selectedServers.toArray(new DataServer_Interface[0]);
+        return selectedServers.toArray(new String[0]);
     }
 
 

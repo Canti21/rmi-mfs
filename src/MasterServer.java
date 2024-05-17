@@ -1,4 +1,5 @@
 import java.io.*;
+import java.rmi.ConnectException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -103,6 +104,8 @@ public class MasterServer
             }
             updateServers();
         }
+        catch(ConnectException ce) {}
+        catch(NullPointerException npe) {}
         catch (Exception ex)
         {
             ex.printStackTrace();
